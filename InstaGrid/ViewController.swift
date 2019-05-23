@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var downLeftView: UIView!
     @IBOutlet weak var downRightView: UIView!
     
+    let screenWidth = UIScreen.main.bounds.width
     var tag : Int?
     let pickerController = UIImagePickerController()
     var swipeGestureRecognizer: UISwipeGestureRecognizer?
@@ -38,14 +39,34 @@ class ViewController: UIViewController {
     }
     
     @objc func share(){
-        print("Share")
+        let activityController = UIActivityViewController(activityItems: [insertImages!], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
     }
+    
+    
+    func transformView() {
+        let screenWidth = UIScreen.main.bounds.width
+        var translationTransform: CGAffineTransform
+        if swipeGestureRecognizer?.direction == .left || swipeGestureRecognizer?.direction == .up {
+            translationTransform = CGAffineTransform(translationX: -screenWidth, y: 0)
+            UIView.animate(withDuration: 1.0, animations: {
+                self.centralView.transform = translationTransform
+            }, completion: nil)
+        } else {
+            translationTransform = CGAffineTransform(translationX: screenWidth, y: 0)
+        }
+    }
+    
     
     @objc func setUpSwipeDirection() {
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
             swipeGestureRecognizer?.direction = .left
+          //  transformView()
+            share()
         } else {
             swipeGestureRecognizer?.direction = .up
+          //  transformView()
+            share()
         }
     }
     
@@ -80,12 +101,12 @@ class ViewController: UIViewController {
             break
         }
     }
-
-@objc func handleTap(sender: UITapGestureRecognizer) {
-    tag = sender.view?.tag
-    importPhotoFromLibrary()
-}
-
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        tag = sender.view?.tag
+        importPhotoFromLibrary()
+    }
+    
 }
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

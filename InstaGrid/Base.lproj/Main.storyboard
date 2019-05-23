@@ -152,19 +152,19 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="J9a-r2-yF5">
-                                <rect key="frame" x="154.66666666666666" y="130" width="104.66666666666666" height="61"/>
+                                <rect key="frame" x="130" y="121.33333333333331" width="154" height="69.666666666666686"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe up" translatesAutoresizingMaskIntoConstraints="NO" id="7us-aa-xjQ">
-                                        <rect key="frame" x="45" y="0.0" width="15" height="10"/>
+                                        <rect key="frame" x="69.666666666666657" y="0.0" width="15" height="10"/>
                                         <variation key="heightClass=compact" image="Swipe left"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKs-Rg-ylV">
-                                        <rect key="frame" x="0.0" y="42" width="104.66666666666667" height="19"/>
+                                        <rect key="frame" x="0.0" y="42.000000000000014" width="154" height="27.666666666666671"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Swipe up to share">
                                                 <attributes>
-                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="17" name="Delm-Medium"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <font key="NSFont" size="25" name="Delm-Medium"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -174,8 +174,9 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="Swipe left to share">
                                                     <attributes>
-                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="25" name="Delm-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
