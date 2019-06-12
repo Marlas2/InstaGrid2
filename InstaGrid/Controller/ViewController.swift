@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var downLeftView: UIView!
     @IBOutlet weak var downRightView: UIView!
     
-    let screenWidth = UIScreen.main.bounds.width
     var tag : Int?
     let pickerController = UIImagePickerController()
     var swipeGestureRecognizer: UISwipeGestureRecognizer?
@@ -38,35 +37,38 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(setUpSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
-    @objc func share(){
-        let activityController = UIActivityViewController(activityItems: [insertImages!], applicationActivities: nil)
-        present(activityController, animated: true, completion: nil)
-    }
-    
-    
-    func transformView() {
-        let screenWidth = UIScreen.main.bounds.width
-        var translationTransform: CGAffineTransform
-        if swipeGestureRecognizer?.direction == .left || swipeGestureRecognizer?.direction == .up {
-            translationTransform = CGAffineTransform(translationX: -screenWidth, y: 0)
-            UIView.animate(withDuration: 1.0, animations: {
-                self.centralView.transform = translationTransform
-            }, completion: nil)
-        } else {
-            translationTransform = CGAffineTransform(translationX: screenWidth, y: 0)
+    func displaySharePopUp(image: UIImage) {
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { _, _, _, _ in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.centralView.transform = .identity
+            })
         }
     }
     
+    @objc func share() {
+        if swipeGestureRecognizer?.direction == .up {
+            centralViewTranslationAnimation(x: 0, y: -view.frame.height)
+            
+        } else {
+            centralViewTranslationAnimation(x: -view.frame.width, y: 0)
+        }
+    }
+    
+    func centralViewTranslationAnimation(x: CGFloat, y: CGFloat) {
+        UIView.animate(withDuration: 0.5) {
+            self.centralView.transform = CGAffineTransform(translationX: x, y: y)
+            guard let image = self.centralView.convertToImage() else { return }
+            self.displaySharePopUp(image: image)
+        }
+    }
     
     @objc func setUpSwipeDirection() {
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
             swipeGestureRecognizer?.direction = .left
-          //  transformView()
-            share()
         } else {
             swipeGestureRecognizer?.direction = .up
-          //  transformView()
-            share()
         }
     }
     
@@ -77,12 +79,10 @@ class ViewController: UIViewController {
         present(pickerController, animated: true, completion: nil)
     }
     
-    
     @IBAction func layoutButtonImages(_ sender: UIButton) {
         tag = sender.tag
         importPhotoFromLibrary()
     }
-    
     
     @IBAction func layoutButtonTaped(_ sender: UIButton) {
         layoutButtons.forEach { $0.isSelected = false }
@@ -106,17 +106,13 @@ class ViewController: UIViewController {
         tag = sender.view?.tag
         importPhotoFromLibrary()
     }
-    
 }
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        
         guard let selectedPhoto = info[.originalImage] as? UIImage else { return }
         guard let tag = tag else { return }
-        
         
         insertImages[tag].image = selectedPhoto
         insertImages[tag].contentMode = .scaleAspectFill
@@ -127,9 +123,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
 }
+
