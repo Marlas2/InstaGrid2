@@ -10,23 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var swipeUpLabel: UILabel!
+    //MARK: - Outlets
+    @IBOutlet private weak var swipeUpLabel: UILabel!
+    @IBOutlet private weak var swipeUpToShare: UIImageView!
+    @IBOutlet private var insertImages: [UIImageView]!
+    @IBOutlet private var crossButtons: [UIButton]!
+    @IBOutlet private var layoutButtons: [UIButton]!
+    @IBOutlet private weak var centralView: UIView!
+    @IBOutlet private weak var topLeftView: UIView!
+    @IBOutlet private weak var topRightView: UIView!
+    @IBOutlet private weak var downLeftView: UIView!
+    @IBOutlet private weak var downRightView: UIView!
     
-    @IBOutlet weak var swipeUpToShare: UIImageView!
-    
-    @IBOutlet var insertImages: [UIImageView]!
-    @IBOutlet var crossButtons: [UIButton]!
-    @IBOutlet var layoutButtons: [UIButton]!
-    @IBOutlet weak var centralView: UIView!
-    
-    @IBOutlet weak var topLeftView: UIView!
-    @IBOutlet weak var topRightView: UIView!
-    @IBOutlet weak var downLeftView: UIView!
-    @IBOutlet weak var downRightView: UIView!
-    
-    var tag : Int?
-    let pickerController = UIImagePickerController()
-    var swipeGestureRecognizer: UISwipeGestureRecognizer?
+    //MARK: - Vars
+    private var tag : Int?
+    private let pickerController = UIImagePickerController()
+    private var swipeGestureRecognizer: UISwipeGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,8 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(setUpSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
-    func displaySharePopUp(image: UIImage) {
+    //Display the pop up to share
+    private func displaySharePopUp(image: UIImage) {
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
         activityViewController.completionWithItemsHandler = { _, _, _, _ in
@@ -47,7 +47,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func share() {
+    //Share when swipe up
+    @objc private func share() {
         if swipeGestureRecognizer?.direction == .up {
             centralViewTranslationAnimation(x: 0, y: -view.frame.height)
             
@@ -56,7 +57,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func centralViewTranslationAnimation(x: CGFloat, y: CGFloat) {
+    //Animation of the central view
+    private func centralViewTranslationAnimation(x: CGFloat, y: CGFloat) {
         UIView.animate(withDuration: 0.5) {
             self.centralView.transform = CGAffineTransform(translationX: x, y: y)
             guard let image = self.centralView.convertToImage() else { return }
@@ -64,7 +66,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func setUpSwipeDirection() {
+    //Swipe left or up in fonction of the orientation of the device
+    @objc private func setUpSwipeDirection() {
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
             swipeGestureRecognizer?.direction = .left
         } else {
@@ -72,19 +75,21 @@ class ViewController: UIViewController {
         }
     }
     
-    func importPhotoFromLibrary() {
+    //Import a photo that source type is a photo library
+    private func importPhotoFromLibrary() {
         pickerController.sourceType = .photoLibrary
         pickerController.delegate = self
         pickerController.allowsEditing = true
         present(pickerController, animated: true, completion: nil)
     }
     
-    @IBAction func layoutButtonImages(_ sender: UIButton) {
+    @IBAction private func layoutButtonImages(_ sender: UIButton) {
         tag = sender.tag
         importPhotoFromLibrary()
     }
     
-    @IBAction func layoutButtonTaped(_ sender: UIButton) {
+    //Choose the pattern of the central View
+    @IBAction private func layoutButtonTaped(_ sender: UIButton) {
         layoutButtons.forEach { $0.isSelected = false }
         sender.isSelected = true
         switch sender.tag {
@@ -102,12 +107,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer) {
+    @objc private func handleTap(sender: UITapGestureRecognizer) {
         tag = sender.view?.tag
         importPhotoFromLibrary()
     }
 }
 
+//Extension
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

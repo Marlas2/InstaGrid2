@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2902355822A9393C008DF41C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2902355722A9393C008DF41C /* UIView.swift */; };
+		290B1D8022B27A6E00B00638 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B1D7F22B27A6E00B00638 /* UIImagePickerController.swift */; };
 		29106A43227B1B0900F1BE0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29106A42227B1B0900F1BE0D /* AppDelegate.swift */; };
 		29106A45227B1B0900F1BE0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29106A44227B1B0900F1BE0D /* ViewController.swift */; };
 		29106A48227B1B0900F1BE0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29106A46227B1B0900F1BE0D /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2902355722A9393C008DF41C /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		290B1D7F22B27A6E00B00638 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
 		29106A3F227B1B0900F1BE0D /* InstaGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29106A42227B1B0900F1BE0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29106A44227B1B0900F1BE0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,16 +62,50 @@
 		29106A41227B1B0900F1BE0D /* InstaGrid */ = {
 			isa = PBXGroup;
 			children = (
-				29106A42227B1B0900F1BE0D /* AppDelegate.swift */,
-				29106A44227B1B0900F1BE0D /* ViewController.swift */,
-				29106A46227B1B0900F1BE0D /* Main.storyboard */,
-				29106A49227B1B0A00F1BE0D /* Assets.xcassets */,
-				29106A4B227B1B0A00F1BE0D /* LaunchScreen.storyboard */,
-				29106A4E227B1B0A00F1BE0D /* Info.plist */,
-				29106A572283626B00F1BE0D /* Delm-Medium.otf */,
-				29106A562283626B00F1BE0D /* ThirstySoftRegular.otf */,
+				29D1850122B17788002AF87C /* Extensions */,
+				29D184FE22B16D13002AF87C /* Controller */,
+				29D1850022B16D51002AF87C /* View */,
+				29D184FF22B16D22002AF87C /* Supporting FIles */,
 			);
 			path = InstaGrid;
+			sourceTree = "<group>";
+		};
+		29D184FE22B16D13002AF87C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				29106A44227B1B0900F1BE0D /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		29D184FF22B16D22002AF87C /* Supporting FIles */ = {
+			isa = PBXGroup;
+			children = (
+				29106A4E227B1B0A00F1BE0D /* Info.plist */,
+				29106A562283626B00F1BE0D /* ThirstySoftRegular.otf */,
+				29106A572283626B00F1BE0D /* Delm-Medium.otf */,
+				29106A4B227B1B0A00F1BE0D /* LaunchScreen.storyboard */,
+				29106A42227B1B0900F1BE0D /* AppDelegate.swift */,
+				29106A49227B1B0A00F1BE0D /* Assets.xcassets */,
+			);
+			path = "Supporting FIles";
+			sourceTree = "<group>";
+		};
+		29D1850022B16D51002AF87C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29106A46227B1B0900F1BE0D /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29D1850122B17788002AF87C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2902355722A9393C008DF41C /* UIView.swift */,
+				290B1D7F22B27A6E00B00638 /* UIImagePickerController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +182,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29106A45227B1B0900F1BE0D /* ViewController.swift in Sources */,
+				2902355822A9393C008DF41C /* UIView.swift in Sources */,
 				29106A43227B1B0900F1BE0D /* AppDelegate.swift in Sources */,
+				290B1D8022B27A6E00B00638 /* UIImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 94G4HMUPVL;
-				INFOPLIST_FILE = InstaGrid/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/InstaGrid/Supporting FIles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +350,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 94G4HMUPVL;
-				INFOPLIST_FILE = InstaGrid/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/InstaGrid/Supporting FIles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
